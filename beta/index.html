@@ -260,6 +260,7 @@
 providers.local = new Scaffolding.Cloud.LocalStorageProvider("cloudvariables:9999");
 providers.ws = new Scaffolding.Cloud.WebSocketProvider("wss://kewllab-server.herokuapp.com", "9999");
 for (const provider of Object.values(providers)) scaffolding.addCloudProvider(provider);
+scaffolding.addCloudProviderOverride("☁ bits local", providers["local"] || null);
 scaffolding.addCloudProviderOverride("☁ torso costume name", providers["local"] || null);
 scaffolding.addCloudProviderOverride("☁ render scale", providers["local"] || null);
 scaffolding.addCloudProviderOverride("☁ head costume name", providers["local"] || null);
@@ -291,7 +292,6 @@ scaffolding.addCloudProviderOverride("☁ code sync", providers["local"] || null
 scaffolding.addCloudProviderOverride("☁ sync state", providers["local"] || null);
 scaffolding.addCloudProviderOverride("☁ custom color offset", providers["local"] || null);
 scaffolding.addCloudProviderOverride("☁ eval output", providers["local"] || null);
-scaffolding.addCloudProviderOverride("☁ bits local", providers["local"] || null);
 scaffolding.addCloudProviderOverride("☁ crates timer", providers["local"] || null);
 scaffolding.addCloudProviderOverride("☁ steps today", providers["local"] || null);
 scaffolding.addCloudProviderOverride("☁ playtime today", providers["local"] || null);

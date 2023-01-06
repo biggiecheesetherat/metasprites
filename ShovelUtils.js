@@ -7,6 +7,7 @@ temp = null;
   vm.extensionManager.loadExtensionURL("http://localhost:8000/runtime-options.js")
   vm.extensionManager.loadExtensionURL("http://localhost:8000/CloudLinkWS.js")
   vm.extensionManager.loadExtensionURL("http://localhost:8000/pointerlock.js")
+  vm.extensionManager.loadExtensionURL("http://localhost:8000/stretch.js")
 
   'use strict';
   class ShovelUtils {

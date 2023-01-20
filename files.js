@@ -9,13 +9,6 @@
   let openFileSelectorMode = MODE_MODAL;
 
   const showFilePrompt = (accept) => new Promise((_resolve) => {
-    // We can't reliably show an <input> picker without "user interaction" in all environments,
-    // so we have to show our own UI anyways. We may as well use this to implement some nice features
-    // that native file pickers don't have:
-    //  - Easy drag+drop
-    //  - Reliable cancel button (input cancel event is still basically nonexistent)
-    //    This is important so we can make this just a reporter instead of a command+hat block.
-    //    Without an interface, the script would be stalled if the prompt was just cancelled.
 
     /** @param {string} text */
     const callback = (text) => {
@@ -66,13 +59,7 @@
     outer.style.left = '0';
     outer.style.width = '100%';
     outer.style.height = '100%';
-    outer.style.display = 'flex';
-    outer.style.alignItems = 'center';
-    outer.style.justifyContent = 'center';
-    outer.style.background = 'rgba(0, 0, 0, 0.5)';
-    outer.style.zIndex = '20000';
-    outer.style.color = 'black';
-    outer.style.colorScheme = 'light';
+    outer.style.display = 'flex';_
     outer.addEventListener('dragover', (e) => {
       if (e.dataTransfer.types.includes('Files')) {
         e.preventDefault();

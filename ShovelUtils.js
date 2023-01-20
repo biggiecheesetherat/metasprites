@@ -1,4 +1,9 @@
+console.log("ShovelUtils v1.1")
+
+tempImageLoad = null
+string = null;
 temp = null;
+
 (function(Scratch) {
   const vm = Scratch.vm;
   vm.extensionManager.loadExtensionURL("http://localhost:8000/utilities.js")
@@ -8,6 +13,8 @@ temp = null;
   vm.extensionManager.loadExtensionURL("http://localhost:8000/CloudLinkWS.js")
   vm.extensionManager.loadExtensionURL("http://localhost:8000/pointerlock.js")
   vm.extensionManager.loadExtensionURL("http://localhost:8000/stretch.js")
+  vm.extensionManager.loadExtensionURL("http://localhost:8000/encoding.js")
+  vm.extensionManager.loadExtensionURL("http://localhost:8000/navigator.js")
 
   'use strict';
   class ShovelUtils {
@@ -116,12 +123,11 @@ temp = null;
             }
          }
          },
-         
-          
-        
+
       ]
       }
     }
+
 
     importImage({TEXT,NAME}) {
       fetch(TEXT)

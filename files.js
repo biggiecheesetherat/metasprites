@@ -1,14 +1,24 @@
 (function(Scratch) {
   'use strict';
 
+  if (!Scratch.extensions.unsandboxed) {
+    throw new Error('files extension must be run unsandboxed');
+  }
+
   const MODE_MODAL = 'modal';
   const MODE_IMMEDIATELY_SHOW_SELECTOR = 'selector';
   const MODE_ONLY_SELECTOR = 'only-selector';
   const ALL_MODES = [MODE_MODAL, MODE_IMMEDIATELY_SHOW_SELECTOR, MODE_ONLY_SELECTOR];
-
   let openFileSelectorMode = MODE_MODAL;
-
+  var dataurloutput = null;
   const showFilePrompt = (accept) => new Promise((_resolve) => {
+    // We can't reliably show an <input> picker without "user interaction" in all environments,
+    // so we have to show our own UI anyways. We may as well use this to implement some nice features
+    // that native file pickers don't have:
+    //  - Easy drag+drop
+    //  - Reliable cancel button (input cancel event is still basically nonexistent)
+    //    This is important so we can make this just a reporter instead of a command+hat block.
+    //    Without an interface, the script would be stalled if the prompt was just cancelled.
 
     /** @param {string} text */
     const callback = (text) => {
@@ -28,13 +38,18 @@
 
       const reader = new FileReader();
       reader.onload = () => {
-        callback(reader.result);
+        callback(/** @type {string} */ (reader.result));
       };
       reader.onerror = () => {
         console.error('Failed to read file as text', reader.error);
         callback('');
       };
+      if (dataurloutput) {
+        reader.readAsDataURL(file);
+      } else {
       reader.readAsText(file);
+      }
+      //console.log(dataurloutput)
     };
 
     /** @param {KeyboardEvent} e */
@@ -59,7 +74,13 @@
     outer.style.left = '0';
     outer.style.width = '100%';
     outer.style.height = '100%';
-    outer.style.display = 'flex';_
+    outer.style.display = 'flex';
+    outer.style.alignItems = 'center';
+    outer.style.justifyContent = 'center';
+    outer.style.background = 'rgba(0, 0, 0, 0.5)';
+    outer.style.zIndex = '20000';
+    outer.style.color = 'black';
+    outer.style.colorScheme = 'light';
     outer.addEventListener('dragover', (e) => {
       if (e.dataTransfer.types.includes('Files')) {
         e.preventDefault();
@@ -103,6 +124,7 @@
     input.type = 'file';
     input.accept = accept;
     input.addEventListener('change', (e) => {
+      // @ts-expect-error
       const file = e.target.files[0];
       if (file) {
         readFile(file);
@@ -116,7 +138,8 @@
     modal.appendChild(title);
 
     const subtitle = document.createElement('div');
-    subtitle.textContent = `Accepted formats: ${accept}`;
+    const formattedAccept = accept || 'any';
+    subtitle.textContent = `Accepted formats: ${formattedAccept}`;
     modal.appendChild(subtitle);
 
     document.body.appendChild(outer);
@@ -133,6 +156,7 @@
       outer.remove();
     }
   });
+
 
   const download = (text, file) => {
     const blob = new Blob([text]);
@@ -198,6 +222,17 @@
                 menu: 'automaticallyOpen'
               }
             }
+          },
+          {
+            opcode: 'makedataurl',
+            blockType: Scratch.BlockType.REPORTER,
+            text: 'Open a [extension] file as data url',
+            arguments: {
+              extension: {
+                type: Scratch.ArgumentType.STRING,
+                defaultValue: '.png'
+              }
+            }
           }
         ],
         menus: {
@@ -219,10 +254,17 @@
     }
 
     showPicker () {
+      dataurloutput = false;
       return showFilePrompt('');
     }
 
     showPickerExtensions (args) {
+      dataurloutput = false;
+      return showFilePrompt(args.extension);
+    }
+
+    makedataurl (args) {
+      dataurloutput = true;
       return showFilePrompt(args.extension);
     }
 

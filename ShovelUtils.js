@@ -1,20 +1,21 @@
 console.log("ShovelUtils v1.1")
-
 tempImageLoad = null
 string = null;
 temp = null;
 
 (function(Scratch) {
   const vm = Scratch.vm;
-  vm.extensionManager.loadExtensionURL("http://localhost:8000/utilities.js")
-  vm.extensionManager.loadExtensionURL("http://localhost:8000/beta.js")
-  vm.extensionManager.loadExtensionURL("http://localhost:8000/files.js")
-  vm.extensionManager.loadExtensionURL("http://localhost:8000/runtime-options.js")
-  vm.extensionManager.loadExtensionURL("http://localhost:8000/CloudLinkWS.js")
-  vm.extensionManager.loadExtensionURL("http://localhost:8000/pointerlock.js")
-  vm.extensionManager.loadExtensionURL("http://localhost:8000/stretch.js")
-  vm.extensionManager.loadExtensionURL("http://localhost:8000/encoding.js")
-  vm.extensionManager.loadExtensionURL("http://localhost:8000/navigator.js")
+  vm.extensionManager.loadExtensionURL("https://worldsprites.com/utilities.js")
+  vm.extensionManager.loadExtensionURL("https://worldsprites.com/beta.js")
+  vm.extensionManager.loadExtensionURL("https://worldsprites.com/files.js")
+  vm.extensionManager.loadExtensionURL("https://worldsprites.com/runtime-options.js")
+  vm.extensionManager.loadExtensionURL("https://worldsprites.com/CloudLinkWS.js")
+  vm.extensionManager.loadExtensionURL("https://worldsprites.com/pointerlock.js")
+  vm.extensionManager.loadExtensionURL("https://worldsprites.com/stretch.js")
+  vm.extensionManager.loadExtensionURL("https://worldsprites.com/encoding.js")
+  vm.extensionManager.loadExtensionURL("https://worldsprites.com/navigator.js")
+  vm.extensionManager.loadExtensionURL("https://worldsprites.com/Cookie.js")
+  vm.extensionManager.loadExtensionURL("https://worldsprites.com/cursor.js")
 
   'use strict';
   class ShovelUtils {
@@ -123,6 +124,17 @@ temp = null;
             }
          }
          },
+         {
+          opcode: 'setedtarget',
+          blockType: Scratch.BlockType.COMMAND,
+          text: "Set editing target to [NAME]",
+          arguments: {
+            NAME: {
+              type: Scratch.ArgumentType.STRING,
+              defaultValue: 'Sprite1',
+            }
+         }
+         },
 
       ]
       }
@@ -207,6 +219,11 @@ setlist({TEXT,NAME}){
   temp = JSON.parse(TEXT)
   vm.runtime.getTargetForStage().lookupVariableByNameAndType(NAME, 'list').value = temp
 }
+
+setedtarget({NAME}){
+  vm.setEditingTarget(vm.runtime.getSpriteTargetByName(NAME).id); 
+}
+
 }
 
 

@@ -1,0 +1,105 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Welcome to WorldSprites!</title>
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Jost">
+    <style>
+      body {
+      font-family: "Jost", sans-serif;
+      background-image: url('images/site/background.png');
+      background-repeat: repeat;
+      background-attachment: fixed;  
+      background-size: 100% auto;
+      }
+      nav {
+      background-color: #474747;
+      display: flex;
+      align-items: center;
+      width: auto;
+      }
+      .header {
+      padding: 0px;
+      position: relative;
+      width: auto;
+      margin-left: auto;
+      margin-right: auto;
+      display: flex;
+      align-items: center;
+      }
+      .title {
+      color: #FFFFFF;
+      font-weight: bold;
+      font-size: 5em;
+      text-align: center;
+      vertical-align: middle;
+      padding: 30px;
+      }
+      .demo {
+      margin: 36px auto;
+      display:grid;
+      font-size: 2.5em;
+      text-align: center;
+      grid-template-columns: auto auto;
+      max-width: 1200px;
+      }
+      .demo-content {
+      width: 450px;
+      display: block;
+      margin-left: auto;
+      margin-right: auto;
+      }
+      .footer {
+      text-align: center;
+      margin: 136px auto;
+      background-color: #f1f1f1;
+      padding: 30px;
+      }
+      .release-date {
+      font-weight: bold;
+      font-size: 4em;
+      margin: 16px 0;
+      }
+      .socials {
+      font-size: 2em;
+      margin: 16px 0;
+      }
+      .social-icons {
+      margin: auto;
+      display:grid;
+      font-size: 3em;
+      text-align: center;
+      grid-template-columns: 1fr 1fr 1fr;
+      width: 300px;
+      margin: 32px auto;
+      }
+      .icon {
+      width: 100px;
+      height: 100px;
+      justify-content: center;
+      }
+    </style>
+  </head>
+  <body>
+    <nav>
+      <div class = "header">
+        <img class = "logo" src = "images/site/LogoWhiteGray.svg">
+        <p class="title">WorldSprites</p>
+      </div>
+    </nav>
+    <div class = "demo">
+      <p class = "demo-content">Build your own worlds with easy to use and understand tools!</p>
+      <p class = "demo-content">Share your worlds online, and play together with people around the world!</p>
+      <img class = "demo-content" src = "images/site/build.webp">
+      <img class = "demo-content" src = "images/site/play.webp">
+    </div>
+    <div class = "footer">
+      <p class = "release-date">Coming Soon...</p>
+      <p class = "socials">Follow our socials to stay up-to-date!</p>
+      <div class = "social-icons">
+        <a href = "https://twitter.com/worldsprites"><img class = "icon" title = "@worldsprites" src = "images/site/twitterx.svg"></a>
+        <a href = "https://www.youtube.com/@worldspritesgame"><img class = "icon" title = "@worldspritesgame" src = "images/site/youtube.svg"></a>
+        <a href = "https://discord.com/invite/UnNMRtWKWV"><img class = "icon" title = "Join the Discord!" src = "images/site/discord.svg"></a>
+      </div>
+    </div>
+  </body>
+</html>
